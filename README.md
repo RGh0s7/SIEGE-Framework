@@ -1,1 +1,1 @@
-# SIEGE-Framework
+# SIEGE XSS Framework
