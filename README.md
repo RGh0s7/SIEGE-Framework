@@ -1,10 +1,9 @@
 # SIEGE Framework #
-SIEGE Framework is a open source cross site scripting framework written in C#
-written to simplify Cross Site Scripting
-## Usage ##
-first of all you should compile this project with any C# Compiler when you got the binary you can create a directory called siege and put all your exploits in it
-when you are done with putting your exploit directory together you can start or reload the program 
-and use
+SIEGE Framework is a open source cross site scripting framework written to simplify Cross Site Scripting across multiple sites / pages
+## Lets get started ##
+First of all you should compile this project with Any C# Compiler. When you got the compiled binary you can create a directory called "Siege" and put all your compatible exploits in it.
+When you are done with putting your exploit directory together, you can start or reload the program 
+and use to find the Exploit you want to use.
 ```
 search Example
 ```
@@ -30,6 +29,8 @@ when you finished configuring your settings and varibales you can run the exploi
 exploit
 ```
 ## Features ##
+* Simple Exploit writing
+* Reading Targets from a list
 ## Examples ##
 ### Exploits ###
 for example if your url is 
@@ -40,4 +41,11 @@ save it to a new file in the exploit directory like this
 ```
 http://+target/index.php?q=+var0
 ```
+### List ###
+```
+example.com
+example.com
+example.com
+```
 ## FAQ ##
+
