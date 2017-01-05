@@ -36,6 +36,7 @@ exploit
 * Reading Targets from a list 
 * Lightweight
 * optional logging
+* HTTP and HTTPS support
 
 ## Examples ##
 
