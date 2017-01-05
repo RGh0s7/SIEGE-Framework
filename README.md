@@ -27,4 +27,13 @@ exploit
 ```
 ## Features ##
 ## Examples ##
+### Exploits ###
+for example if your url is 
+```
+http://example.com/index.php?q=1
+```
+save it to a new file in the exploit directory like this
+```
+http://+target/index.php?q=+var0
+```
 ## FAQ ##
