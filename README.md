@@ -29,9 +29,11 @@ when you finished configuring your settings and varibales you can run the exploi
 exploit
 ```
 ## Features ##
-* Simple Exploit writing
-* Reading Targets from a list
+* Simple Exploit writing * 
+* Reading Targets from a list *
+
 ## Examples ##
+
 ### Exploits ###
 for example if your url is 
 ```
