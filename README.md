@@ -19,6 +19,10 @@ show
 ```
 when you know what variables must be set you can use
 ```
+set target example.com
+```
+and
+```
 set var0 test
 ```
 when you finished configuring your settings and varibales you can run the exploit with
