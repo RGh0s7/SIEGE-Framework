@@ -51,6 +51,7 @@ namespace Siege
                 }
                 else
                 {
+                    Console.WriteLine("SIEGE -> Exploit not found");
                     return false;
                 }
             }

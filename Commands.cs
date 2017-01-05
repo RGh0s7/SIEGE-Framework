@@ -191,6 +191,7 @@ namespace Siege
                     Console.WriteLine("Output -> " + Config.Output);
                     Console.WriteLine("Output path -> " + Config.OutputPath);
                     Console.WriteLine("Listmode -> " + Config.Output);
+                    Console.WriteLine("Useragent -> " + Config.Useragent);
                     Console.WriteLine();
                     Console.WriteLine("------------------------------");
                     Console.WriteLine();
@@ -310,6 +311,26 @@ namespace Siege
                         Console.WriteLine("SIEGE -> Invalid Output mode (use true or false lowercase only!)");
                     }
                 }
+                else if (Input.StartsWith("useragent "))
+                {
+                    Config.Useragent = Input.Substring("useragent ".Length);
+                }
+                else if (Input.StartsWith("mode "))
+                {
+                    if (Input.Substring("mode ".Length) == "get")
+                    {
+                        Config.Mode = 0;
+                        Console.WriteLine("SIEGE -> Mode = Get");
+                    }
+                    else if (Input.Substring("mode ".Length) == "post") {
+                        Config.Mode = 1;
+                        Console.WriteLine("SIEGE -> Mode = Post");
+                    }
+                    else
+                    {
+                        Console.WriteLine("SIEGE -> Invalid Mode (use get or post lowercase only!)");
+                    }
+                }
                 else
                 {
                     Console.WriteLine("SIEGE -> Unknown variable or setting");
@@ -350,7 +371,7 @@ namespace Siege
                 if (Config.ExpUri.Length > 0 && Config.ExpPath.Length > 0) {
                     string FinishUrl = Core.StringBuilder();
                     Console.WriteLine();
-                    if (Config.ListMode = false)
+                    if (Config.ListMode == false)
                     {
                         Console.WriteLine("SIEGE -> Exploit Uri = " + FinishUrl);
                         FileSystem.WriteOutput("SIEGE -> Exploit Uri = " + FinishUrl);
@@ -371,7 +392,7 @@ namespace Siege
                                 FinishUrl = Core.StringBuilder();
                                 Console.WriteLine("SIEGE -> Exploit Uri = " + FinishUrl);
                                 FileSystem.WriteOutput("SIEGE -> Exploit Uri = " + FinishUrl);
-                                if (Http.BasicExec(FinishUrl))
+                                if (Http.GetExec(FinishUrl))
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("SIEGE -> 200 OK");
@@ -398,10 +419,10 @@ namespace Siege
         public static void Reload()
         {
             try {
-                Clear();
                 Config.ExpList.Clear();
                 Config.TargetList.Clear();
                 Config.ExpUri = string.Empty;
+                Config.ExpPath = string.Empty;
                 Config.Target = string.Empty;
                 Config.var0 = string.Empty;
                 Config.var1 = string.Empty;
@@ -416,6 +437,9 @@ namespace Siege
                 Config.ListMode = false;
                 Config.Output = false;
                 Config.OutputPath = "Output.txt";
+                Config.Mode = 0;
+                Config.Useragent = string.Empty;
+                Clear();
                 Core.LoadProgram();
             }
             catch (Exception ex)
