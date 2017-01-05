@@ -32,14 +32,15 @@ exploit
 ```
 
 ## Features ##
+* User-Agent spoofing
 * Simple Exploit writing  
 * Reading Targets from a list 
 * Lightweight
-* optional logging
+* Optional logging
 * HTTP and HTTPS support
+* POST and GET support
 
 ## Examples ##
-
 ### Exploits ###
 for example if your url is 
 ```
@@ -56,5 +57,18 @@ example.com
 example.com
 ```
 
-## FAQ ##
+## Requirements ##
+### Minimum ###
+* Processor: 1 Ghz
+* RAM: 512 MB
+* .NET Framework 3.5
 
+### Recommended ###
+* Processor: 3Ghz Dual-core or Quad-core
+* RAM: 4 GB
+* .NET Framework 3.5
+
+## FAQ ##
+* Q: can this program find xss A: Not in the current state we are working on this
+* Q: can this program be used to execute XSS on multiple hosts A: Yes
+* Q: can this be used for SQLi A: Yes, but the main focus is on XSS
