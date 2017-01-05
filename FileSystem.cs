@@ -60,5 +60,58 @@ namespace Siege
                 return false;
             }
         }
+        public static void ReadList(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    StreamReader SR = new StreamReader(path);
+                    string Line;
+                    while ((Line = SR.ReadLine()) != null)
+                    {
+                        Config.TargetList.Add(Line);
+                    }
+                    Console.WriteLine("SIEGE -> Done reading list");
+                }
+                else
+                {
+                    Console.WriteLine("SIEGE -> List does not exsist");
+                }
+            }
+            catch (Exception ex)
+            {
+                Core.LogError(ex.Message);
+            }
+        }
+        public static void WriteOutput(string input)
+        {
+            try
+            {
+
+                if (File.Exists(Config.OutputPath))
+                {
+                    StreamReader SR = new StreamReader(Config.OutputPath);
+                    String Data = SR.ReadToEnd();
+                    SR.Close();
+                    StreamWriter SW = new StreamWriter(Config.OutputPath);
+                    SW.Write(Data);
+                    SW.WriteLine(DateTime.Now + " " + input);
+                    SW.Flush();
+                    SW.Close();
+                }
+                else
+                {
+                    StreamWriter SW = new StreamWriter(Config.OutputPath);
+                    SW.WriteLine(DateTime.Now + " " + input);
+                    SW.Flush();
+                    SW.Close();
+                }         
+            }
+            catch (Exception ex)
+            {
+                Core.LogError(ex.Message);
+            }
+        }
     }
 }

@@ -15,6 +15,9 @@ namespace Siege
             {
                 WebClient Worker = new WebClient();
                 Worker.DownloadString(url);
+                if (Config.Output == true) {
+                    FileSystem.WriteOutput("SIEGE -> 200 OK");
+                }
                 return true;
             }
             catch (Exception ex)

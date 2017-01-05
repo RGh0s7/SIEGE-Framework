@@ -20,7 +20,7 @@ namespace Siege
             }
             catch (Exception ex)
             {
-
+                LogError(ex.Message);
             }
         }
         public static void PrintUI()
@@ -75,11 +75,38 @@ namespace Siege
                     }
                     else if (input[0] == "show")
                     {
-                        Commands.Show();
-                    }
-                    else if (input[0] == "show-all")
-                    {
-                        Commands.ShowAll();
+                        int Count = 0;
+                        foreach (var item in input)
+                        {
+                            Count++;
+                        }
+                        if (Count > 1)
+                        {
+                            if (input[1] == "all")
+                            {
+                                Commands.ShowAll();
+                            }
+                            else if (input[1] == "list")
+                            {
+                                Commands.ShowList();
+                            }
+                            else if (input[1] == "settings")
+                            {
+                                Commands.ShowSettings();
+                            }
+                            else if (input[1] == "exploits")
+                            {
+                                Commands.ShowExploits();
+                            }
+                            else
+                            {
+                                Commands.Show();
+                            }
+                        }
+                        else
+                        {
+                            Commands.Show();
+                        }
                     }
                     else if (input[0] == "help" || input[0] == "?")
                     {
@@ -87,7 +114,7 @@ namespace Siege
                     }
                     else if (input[0] == "clear")
                     {
-                        Commands.Reload();
+                        Commands.Clear();
                     }
                     else if(input[0] == "reload")
                     {
@@ -191,243 +218,403 @@ namespace Siege
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 400 Bad Request");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 400 Bad Request");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("401"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 401 Unauthorized");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 401 Unauthorized");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("402"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 402 Payment Required");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 402 Payment Required");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("403"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 403 Forbidden");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 403 Forbidden");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("404"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 404 Not Found");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 404 Not Found");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("405"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 405 Method Not Allowed");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 405 Method Not Allowed");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("406"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 406 Not Acceptable");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 406 Not Acceptable");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("407"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 407 Proxy Authentication Required");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 407 Proxy Authentication Required");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("408"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 408 Request Time-out");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 408 Request Time-out");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("409"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 409 Conflict");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 409 Conflict");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("410"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 410 Gone");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 410 Gone");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("411"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 411 Length Required");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 411 Length Required");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("412"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 412 Precondition Failed");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 412 Precondition Failed");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("413"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 413 Payload Too Large");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 413 Payload Too Large");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("414"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 414 URI Too Long");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 414 URI Too Long");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("415"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 415 Unsupported Media Type");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 415 Unsupported Media Type");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("416"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 416 Range Not Satisfiable");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 416 Range Not Satisfiable");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("417"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 417 Expectation Failed");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 417 Expectation Failed");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("418"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 418 I'm a teapot");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 418 I'm a teapot");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("421"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 421 Misdirected Request");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 421 Misdirected Request");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("422"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 422 Unprocessable Entity");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 422 Unprocessable Entity");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("423"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 423 Locked");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 423 Locked");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("424"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 424 Failed Dependency");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 424 Failed Dependency");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("426"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 426 Upgrade Required");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 426 Upgrade Required");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("428"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 428 Precondition Required");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 428 Precondition Required");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("429"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 429 Too Many Requests");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 429 Too Many Requests");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("431"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 431 Request Header Fields Too Large");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 431 Request Header Fields Too Large");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("451"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 451 Unavailable For Legal Reasons");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 451 Unavailable For Legal Reasons");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("500"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 500 Internal Server Error");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 500 Internal Server Error");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("501"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 501 Not Implemented");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 501 Not Implemented");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("502"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 500 Internal Server Error");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 500 Internal Server Error");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("503"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 503 Service Unavailable");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 503 Service Unavailable");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("504"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 504 Gateway Time-out");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 504 Gateway Time-out");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("505"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 505 HTTP Version Not Supported");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 505 HTTP Version Not Supported");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("506"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 506 Variant Also Negotiater");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 506 Variant Also Negotiater");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("507"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 507 Insufficient Storage");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 507 Insufficient Storage");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("508"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 508 Loop Detected");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 508 Loop Detected");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("510"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 510 Not Extended");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 510 Not Extended");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input.Contains("511"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> 511 Network Authentication Required");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 511 Network Authentication Required");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("SIEGE -> Unknown Status code");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> Unknown Status code");
+                    }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-                }
+            }
             catch (Exception ex)
             {
                 LogError(ex.Message);

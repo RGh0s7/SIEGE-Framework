@@ -17,7 +17,7 @@ namespace Siege
                 Console.WriteLine("set - set predefined variable used by exploits");
                 Console.WriteLine("search - used for searching exploits");
                 Console.WriteLine("clear - clean's console text");
-                Console.WriteLine("show - displays info");
+                Console.WriteLine("show - displays info (Ex. vars | settings | list | exploits)");
                 Console.WriteLine("exploit / run - runs exploit");
                 Console.WriteLine("reload - Reload exploits and program");
                 Console.WriteLine("exit - exits program");
@@ -123,6 +123,83 @@ namespace Siege
                 Core.LogError(ex.Message);
             }
         }
+        public static void ShowList()
+        {
+            try
+            {
+                if (Config.TargetList.Count > 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("---------- List ----------");
+                    Console.WriteLine();
+                    int Line = 1;
+                    foreach (var item in Config.TargetList)
+                    {
+                        Console.WriteLine(Line + " -> " + item);
+                        Line++;
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine("--------------------------");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("SIEGE -> Not using any list");
+                }
+            }
+            catch (Exception ex)
+            {
+                Core.LogError(ex.Message);
+            }
+        }
+        public static void ShowExploits()
+        {
+            try
+            {
+                if (Config.ExpList.Count > 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("---------- Exploits ----------");
+                    Console.WriteLine();
+                    int Line = 1;
+                    foreach (var item in Config.ExpList)
+                    {
+                        Console.WriteLine(Line + " -> " + item);
+                        Line++;
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine("------------------------------");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("SIEGE -> Not using any list");
+                }
+            }
+            catch (Exception ex)
+            {
+                Core.LogError(ex.Message);
+            }
+        }
+        public static void ShowSettings()
+        {
+            try
+            {
+                    Console.WriteLine();
+                    Console.WriteLine("---------- Settings ----------");
+                    Console.WriteLine();
+                    Console.WriteLine("Output -> " + Config.Output);
+                    Console.WriteLine("Output path -> " + Config.OutputPath);
+                    Console.WriteLine("Listmode -> " + Config.Output);
+                    Console.WriteLine();
+                    Console.WriteLine("------------------------------");
+                    Console.WriteLine();
+            }
+            catch (Exception ex)
+            {
+                Core.LogError(ex.Message);
+            }
+        }
         public static void use(string Input)
         {
             try { 
@@ -143,45 +220,99 @@ namespace Siege
                 {
                     Config.Target = Input.Substring("target ".Length);
                 }
-                if (Input.StartsWith("var0 "))
+                else if (Input.StartsWith("var0 "))
                 {
                     Config.var0 = Input.Substring("var0 ".Length);
                 }
-                if (Input.StartsWith("var1 "))
+                else if (Input.StartsWith("var1 "))
                 {
                     Config.var1 = Input.Substring("var1 ".Length);
                 }
-                if (Input.StartsWith("var2 "))
+                else if (Input.StartsWith("var2 "))
                 {
                     Config.var2 = Input.Substring("var2 ".Length);
                 }
-                if (Input.StartsWith("var3 "))
+                else if (Input.StartsWith("var3 "))
                 {
                     Config.var3 = Input.Substring("var3 ".Length);
                 }
-                if (Input.StartsWith("var4 "))
+                else if (Input.StartsWith("var4 "))
                 {
                     Config.var4 = Input.Substring("var4 ".Length);
                 }
-                if (Input.StartsWith("var5 "))
+                else if (Input.StartsWith("var5 "))
                 {
                     Config.var5 = Input.Substring("var5 ".Length);
                 }
-                if (Input.StartsWith("var6 "))
+                else if (Input.StartsWith("var6 "))
                 {
                     Config.var6 = Input.Substring("var6 ".Length);
                 }
-                if (Input.StartsWith("var7 "))
+                else if (Input.StartsWith("var7 "))
                 {
                     Config.var7 = Input.Substring("var7 ".Length);
                 }
-                if (Input.StartsWith("var8 "))
+                else if (Input.StartsWith("var8 "))
                 {
                     Config.var8 = Input.Substring("var8 ".Length);
                 }
-                if (Input.StartsWith("var9 "))
+                else if (Input.StartsWith("var9 "))
                 {
                     Config.var9 = Input.Substring("var9 ".Length);
+                }
+                else if (Input.StartsWith("list "))
+                {
+                   FileSystem.ReadList(Input.Substring("list ".Length));
+                }
+                else if (Input.StartsWith("listmode "))
+                {
+                    if (Input.Substring("listmode ".Length) == "true")
+                    {
+                        Config.ListMode = true;
+                        Console.WriteLine("SIEGE -> List mode = true");
+                    }
+                    else if (Input.Substring("listmode ".Length) == "false")
+                    {
+                        Config.ListMode = false;
+                        Console.WriteLine("SIEGE -> List mode = false");
+                    }
+                    else
+                    {
+                        Console.WriteLine("SIEGE -> Invalid list mode (use true or false lowercase only!)");
+                    }
+                }
+                else if (Input.StartsWith("output "))
+                {
+                    if (Input.Substring("output ".Length).Length > 0)
+                    {
+                        Config.OutputPath = Config.OutputPath = Input.Substring("output ".Length);
+                        Console.WriteLine("SIEGE -> Output Path = " + Config.OutputPath);
+                    }
+                    else
+                    {
+                        Console.WriteLine("SIEGE -> Invalid output path");
+                    }
+                }
+                else if (Input.StartsWith("outputmode "))
+                {
+                    if (Input.Substring("outputmode ".Length) == "true")
+                    {
+                        Config.Output = true;
+                        Console.WriteLine("SIEGE -> Output mode = true");
+                    }
+                    else if (Input.Substring("outputmode ".Length) == "false")
+                    {
+                        Config.Output = false;
+                        Console.WriteLine("SIEGE -> Output mode = false");
+                    }
+                    else
+                    {
+                        Console.WriteLine("SIEGE -> Invalid Output mode (use true or false lowercase only!)");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("SIEGE -> Unknown variable or setting");
                 }
             }
             catch (Exception ex)
@@ -219,12 +350,39 @@ namespace Siege
                 if (Config.ExpUri.Length > 0 && Config.ExpPath.Length > 0) {
                     string FinishUrl = Core.StringBuilder();
                     Console.WriteLine();
-                    Console.WriteLine("Exploit Uri: " + FinishUrl);
-                    if (Http.BasicExec(FinishUrl))
+                    if (Config.ListMode = false)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("SIEGE -> 200 OK");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("SIEGE -> Exploit Uri = " + FinishUrl);
+                        FileSystem.WriteOutput("SIEGE -> Exploit Uri = " + FinishUrl);
+                        if (Http.BasicExec(FinishUrl))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("SIEGE -> 200 OK");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                    else
+                    {
+                        if (Config.TargetList.Count > 0)
+                        {
+                            foreach (var value in Config.TargetList)
+                            {
+                                Config.Target = value;
+                                FinishUrl = Core.StringBuilder();
+                                Console.WriteLine("SIEGE -> Exploit Uri = " + FinishUrl);
+                                FileSystem.WriteOutput("SIEGE -> Exploit Uri = " + FinishUrl);
+                                if (Http.BasicExec(FinishUrl))
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("SIEGE -> 200 OK");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("SIEGE -> Make sure that you set a valid list");
+                        }
                     }
                 }
                 else
@@ -242,6 +400,7 @@ namespace Siege
             try {
                 Clear();
                 Config.ExpList.Clear();
+                Config.TargetList.Clear();
                 Config.ExpUri = string.Empty;
                 Config.Target = string.Empty;
                 Config.var0 = string.Empty;
@@ -254,6 +413,9 @@ namespace Siege
                 Config.var7 = string.Empty;
                 Config.var8 = string.Empty;
                 Config.var9 = string.Empty;
+                Config.ListMode = false;
+                Config.Output = false;
+                Config.OutputPath = "Output.txt";
                 Core.LoadProgram();
             }
             catch (Exception ex)
@@ -275,6 +437,17 @@ namespace Siege
         {
             try {
                 Config.running = false;
+            }
+            catch (Exception ex)
+            {
+                Core.LogError(ex.Message);
+            }
+        }
+        public static void ListMode()
+        {
+            try
+            {
+
             }
             catch (Exception ex)
             {
