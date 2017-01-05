@@ -2,7 +2,7 @@
 
 SIEGE Framework is a open source cross site scripting framework written to simplify Cross Site Scripting across multiple sites / pages
 
-## Lets get started ##
+## Let's get started ##
 First of all you should compile this project with Any C# Compiler. When you got the compiled binary you can create a directory called "Siege" and put all your compatible exploits in it.
 When you are done with putting your exploit directory together, you can start or reload the program 
 and use to find the Exploit you want to use.
