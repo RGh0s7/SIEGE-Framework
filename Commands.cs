@@ -20,6 +20,7 @@ namespace Siege
                 Console.WriteLine("show - displays info (Ex. vars | settings | list | exploits)");
                 Console.WriteLine("exploit / run - runs exploit");
                 Console.WriteLine("reload - Reload exploits and program");
+                Console.WriteLine("pastebin - loads exploit from pastebin");
                 Console.WriteLine("exit - exits program");
                 Console.WriteLine("help / ? - shows this text");
                 Console.WriteLine(" ");

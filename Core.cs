@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
 
 namespace Siege
 {
@@ -123,6 +124,10 @@ namespace Siege
                     else if (input[0] == "exit")
                     {
                         Commands.Exit();
+                    }
+                    else if (RawInput.StartsWith("pastebin "))
+                    {
+                        Core.GetPastebin(RawInput.Substring("pastebin ".Length));
                     }
                     else
                     {
@@ -618,6 +623,51 @@ namespace Siege
             catch (Exception ex)
             {
                 LogError(ex.Message);
+            }
+        }
+        public static void GetPastebin(string Input) {
+            try
+            {
+                if (Input.StartsWith("http://pastebin.com/"))
+                {
+                    WebClient Pastebin = new WebClient();
+                    string Payload = Pastebin.DownloadString("http://pastebin.com/raw/" + Input.Substring("http://pastebin.com/".Length));
+                    Config.ExpUri = Payload;
+                    Config.ExpPath = "pastebin.com/" + Input.Substring("http://pastebin.com/".Length);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("SIEGE -> 200 OK");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                if (Input.StartsWith("https://pastebin.com/"))
+                {
+                    WebClient Pastebin = new WebClient();
+                    string Payload = Pastebin.DownloadString("https://pastebin.com/raw/" + Input.Substring("https://pastebin.com/".Length));
+                    Config.ExpUri = Payload;
+                    Config.ExpPath = "pastebin.com/" + Input.Substring("https://pastebin.com/".Length);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("SIEGE -> 200 OK");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                if (Input.StartsWith("pastebin.com/"))
+                {
+                    WebClient Pastebin = new WebClient();
+                    string Payload = Pastebin.DownloadString("pastebin.com/raw/" + Input.Substring("pastebin.com/".Length));
+                    Config.ExpUri = Payload;
+                    Config.ExpPath = "pastebin.com/" + Input.Substring("pastebin.com/".Length);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("SIEGE -> 200 OK");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            catch (Exception  ex)
+            {
+                if (ex.Message.Contains("404")) {
+                    Console.WriteLine("SIEGE -> Pastebin not found!");
+                }
+                else
+                {
+                    LogError(ex.Message);
+                }
             }
         }
     }
