@@ -11,6 +11,7 @@ namespace Siege
         public static void Help()
         {
             try { 
+                // Help output
                 Console.WriteLine("---------- Help ----------");
                 Console.WriteLine(" ");
                 Console.WriteLine("use - use exploit from exploit directory");
@@ -20,7 +21,6 @@ namespace Siege
                 Console.WriteLine("show - displays info (Ex. vars | settings | list | exploits)");
                 Console.WriteLine("exploit / run - runs exploit");
                 Console.WriteLine("reload - Reload exploits and program");
-                Console.WriteLine("pastebin - loads exploit from pastebin");
                 Console.WriteLine("exit - exits program");
                 Console.WriteLine("help / ? - shows this text");
                 Console.WriteLine(" ");
@@ -36,6 +36,7 @@ namespace Siege
             try { 
                 if (Config.ExpUri != String.Empty)
                 {
+                    // Output Vars
                     Console.WriteLine();
                     Console.WriteLine("---------- vars ----------");
                     Console.WriteLine();
@@ -90,6 +91,7 @@ namespace Siege
                 }
                 else
                 {
+                    // Call Show all function
                     ShowAll();
                 }
             }
@@ -101,6 +103,7 @@ namespace Siege
         public static void ShowAll()
         {
             try { 
+                // Show all
                 Console.WriteLine();
                 Console.WriteLine("---------- vars ----------");
                 Console.WriteLine();
@@ -130,10 +133,12 @@ namespace Siege
             {
                 if (Config.TargetList.Count > 0)
                 {
+                    // Show List
                     Console.WriteLine();
                     Console.WriteLine("---------- List ----------");
                     Console.WriteLine();
                     int Line = 1;
+                    // For each item in list
                     foreach (var item in Config.TargetList)
                     {
                         Console.WriteLine(Line + " -> " + item);
@@ -157,8 +162,10 @@ namespace Siege
         {
             try
             {
+                // Check if there is something on list
                 if (Config.ExpList.Count > 0)
                 {
+                    // Show all Exploits
                     Console.WriteLine();
                     Console.WriteLine("---------- Exploits ----------");
                     Console.WriteLine();
@@ -186,6 +193,7 @@ namespace Siege
         {
             try
             {
+                    // Shw Settings
                     Console.WriteLine();
                     Console.WriteLine("---------- Settings ----------");
                     Console.WriteLine();
@@ -204,6 +212,7 @@ namespace Siege
         }
         public static void use(string Input)
         {
+            // Read Exploit
             try { 
                 if (Input.Length > 0)
                 {
@@ -218,6 +227,7 @@ namespace Siege
         public static void set(string Input)
         {
             try { 
+                // Set Var to input
                 if (Input.StartsWith("target "))
                 {
                     Config.Target = Input.Substring("target ".Length);
@@ -347,6 +357,7 @@ namespace Siege
             try { 
                 Console.WriteLine();
                 int found = 0;
+                // For each item in list
                 if (Config.ExpList.Count != 0)
                 {
                     foreach (var value in Config.ExpList)
@@ -369,6 +380,7 @@ namespace Siege
         public static void Exploit()
         {
             try { 
+                 // Check if there is an exploit in use
                 if (Config.ExpUri.Length > 0 && Config.ExpPath.Length > 0) {
                     string FinishUrl = Core.StringBuilder();
                     Console.WriteLine();
@@ -376,6 +388,7 @@ namespace Siege
                     {
                         Console.WriteLine("SIEGE -> Exploit Uri = " + FinishUrl);
                         FileSystem.WriteOutput("SIEGE -> Exploit Uri = " + FinishUrl);
+                        // Execute Exploit
                         if (Http.BasicExec(FinishUrl))
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -389,10 +402,12 @@ namespace Siege
                         {
                             foreach (var value in Config.TargetList)
                             {
+                                // For each item in list
                                 Config.Target = value;
                                 FinishUrl = Core.StringBuilder();
                                 Console.WriteLine("SIEGE -> Exploit Uri = " + FinishUrl);
                                 FileSystem.WriteOutput("SIEGE -> Exploit Uri = " + FinishUrl);
+                                // Execute Exploit
                                 if (Http.GetExec(FinishUrl))
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
@@ -420,6 +435,7 @@ namespace Siege
         public static void Reload()
         {
             try {
+                // Clear all settings
                 Config.ExpList.Clear();
                 Config.TargetList.Clear();
                 Config.ExpUri = string.Empty;
@@ -451,6 +467,7 @@ namespace Siege
         public static void Clear()
         {
             try {
+                // Clear console
                 Console.Clear();
             }
             catch (Exception ex)

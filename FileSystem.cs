@@ -8,12 +8,15 @@ namespace Siege
 {
     class FileSystem
     {
+        // Load Exploits
         public static int InitExploits()
         {
             int count = 0;
             try {
+                // Check if Directory Exsists
                 if (Directory.Exists("Siege")) {
                     DirectoryInfo di = new DirectoryInfo("Siege");
+                    // For each exploit file
                     foreach (var f in di.GetFiles("*" + Config.Extention))
                     {
                         string Fname = f.Name.ToString();
@@ -23,8 +26,10 @@ namespace Siege
                 }
                 else
                 {
+                    // Create Directory
                     Directory.CreateDirectory("Siege");
                     DirectoryInfo di = new DirectoryInfo("Siege");
+                    // For each exploit file
                     foreach (var f in di.GetFiles("*" + Config.Extention))
                     {
                         string Fname = f.Name.ToString();
@@ -43,8 +48,10 @@ namespace Siege
         {
             try
             {
+                // Check if Exploit exists
                 if (File.Exists("siege\\" + input + Config.Extention)) {
                     Config.ExpPath = input;
+                    // Read Exploit
                     StreamReader SR = new StreamReader("siege\\" + input + Config.Extention);
                     Config.ExpUri = SR.ReadToEnd();
                     return true;
@@ -65,12 +72,15 @@ namespace Siege
         {
             try
             {
+                // Check if file exists
                 if (File.Exists(path))
                 {
+                    // Read list
                     StreamReader SR = new StreamReader(path);
                     string Line;
                     while ((Line = SR.ReadLine()) != null)
                     {
+                        // Add to target list
                         Config.TargetList.Add(Line);
                     }
                     Console.WriteLine("SIEGE -> Done reading list");
@@ -89,12 +99,14 @@ namespace Siege
         {
             try
             {
-
+                // Check if log exists
                 if (File.Exists(Config.OutputPath))
                 {
+                    // Read log if exists
                     StreamReader SR = new StreamReader(Config.OutputPath);
                     String Data = SR.ReadToEnd();
                     SR.Close();
+                    // Open stream for logging
                     StreamWriter SW = new StreamWriter(Config.OutputPath);
                     SW.Write(Data);
                     SW.WriteLine(DateTime.Now + " " + input);
@@ -103,6 +115,7 @@ namespace Siege
                 }
                 else
                 {
+                    // Open stream for logging
                     StreamWriter SW = new StreamWriter(Config.OutputPath);
                     SW.WriteLine(DateTime.Now + " " + input);
                     SW.Flush();

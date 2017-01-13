@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Net;
 
 namespace Siege
 {
@@ -27,8 +26,10 @@ namespace Siege
         public static void PrintUI()
         {
             try {
+                // Check if Exploit is set
                 if (Config.ExpPath.Length > 0)
                 {
+                    // Print UI
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("SIEGE [");
@@ -39,7 +40,8 @@ namespace Siege
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
-                {
+                {   
+                    // Print without UI
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("SIEGE > ");
@@ -54,10 +56,12 @@ namespace Siege
         public static void CommandPaser(string RawInput)
         {
             try {
+                // Check if there is input
                 if (RawInput.Length > 0)
                 {
                     string[] input = RawInput.Split(Convert.ToChar(" "));
                     input[0] = input[0].ToLower();
+                    // Check input in command list
                     if (input[0].StartsWith("use"))
                     {
                         Commands.use(RawInput.Substring("use ".Length));
@@ -125,10 +129,6 @@ namespace Siege
                     {
                         Commands.Exit();
                     }
-                    else if (RawInput.StartsWith("pastebin "))
-                    {
-                        Core.GetPastebin(RawInput.Substring("pastebin ".Length));
-                    }
                     else
                     {
                         Console.WriteLine("SIEGE -> Invalid or Unknown command please try again or use ?"); 
@@ -148,53 +148,54 @@ namespace Siege
         {
             try
             {
+                // Check if Exploit is set
                 if (Config.ExpUri.Length > 0) { 
-                string output = Config.ExpUri;
-                if (output.Contains("+target"))
-                {
-                    output = output.Replace("+target", Config.Target);
-                }
-                if (output.Contains("+var0"))
-                {
-                     output = output.Replace("+var0", Config.var0);
-                }
-                if (output.Contains("+var1"))
-                {
-                     output = output.Replace("+var1", Config.var1);
-                }
-                if (output.Contains("+var2"))
-                {
-                     output = output.Replace("+var2", Config.var2);
-                }
-                if (output.Contains("+var3"))
-                {
-                    output =  output.Replace("+var3", Config.var3);
-                }
-                if (output.Contains("+var4"))
-                {
-                     output = output.Replace("+var4", Config.var4);
-                }
-                if (output.Contains("+var5"))
-                {
-                     output = output.Replace("+var5", Config.var5);
-                }
-                if (output.Contains("+var6"))
-                {
-                    output = output.Replace("+var6", Config.var6);
-                }
-                if (output.Contains("+var7"))
-                {
-                    output = output.Replace("+var7", Config.var7);
-                }
-                if (output.Contains("+var8"))
-                {
-                    output = output.Replace("+var8", Config.var8);
-                }
-                if (output.Contains("+var9"))
-                {
-                    output = output.Replace("+var9", Config.var9);
-                }
-                return output;
+                    string output = Config.ExpUri;
+                    if (output.Contains("+target"))
+                    {
+                        output = output.Replace("+target", Config.Target);
+                    }
+                    if (output.Contains("+var0"))
+                    {
+                         output = output.Replace("+var0", Config.var0);
+                    }
+                    if (output.Contains("+var1"))
+                    {
+                         output = output.Replace("+var1", Config.var1);
+                    }
+                    if (output.Contains("+var2"))
+                    {
+                         output = output.Replace("+var2", Config.var2);
+                    }
+                    if (output.Contains("+var3"))
+                    {
+                        output =  output.Replace("+var3", Config.var3);
+                    }
+                    if (output.Contains("+var4"))
+                    {
+                         output = output.Replace("+var4", Config.var4);
+                    }
+                    if (output.Contains("+var5"))
+                    {
+                         output = output.Replace("+var5", Config.var5);
+                    }
+                    if (output.Contains("+var6"))
+                    {
+                        output = output.Replace("+var6", Config.var6);
+                    }
+                    if (output.Contains("+var7"))
+                    {
+                        output = output.Replace("+var7", Config.var7);
+                    }
+                    if (output.Contains("+var8"))
+                    {
+                        output = output.Replace("+var8", Config.var8);
+                    }
+                    if (output.Contains("+var9"))
+                    {
+                        output = output.Replace("+var9", Config.var9);
+                    }
+                    return output;
                 }
                 else
                 {
@@ -219,6 +220,7 @@ namespace Siege
         public static void StatusCodeParser(string input)
         {
             try { 
+            // Client Errors
                 if (input.Contains("400"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -499,6 +501,7 @@ namespace Siege
                     }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
+                // Server Errors
                 else if (input.Contains("500"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -623,51 +626,6 @@ namespace Siege
             catch (Exception ex)
             {
                 LogError(ex.Message);
-            }
-        }
-        public static void GetPastebin(string Input) {
-            try
-            {
-                if (Input.StartsWith("http://pastebin.com/"))
-                {
-                    WebClient Pastebin = new WebClient();
-                    string Payload = Pastebin.DownloadString("http://pastebin.com/raw/" + Input.Substring("http://pastebin.com/".Length));
-                    Config.ExpUri = Payload;
-                    Config.ExpPath = "pastebin.com/" + Input.Substring("http://pastebin.com/".Length);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("SIEGE -> 200 OK");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (Input.StartsWith("https://pastebin.com/"))
-                {
-                    WebClient Pastebin = new WebClient();
-                    string Payload = Pastebin.DownloadString("https://pastebin.com/raw/" + Input.Substring("https://pastebin.com/".Length));
-                    Config.ExpUri = Payload;
-                    Config.ExpPath = "pastebin.com/" + Input.Substring("https://pastebin.com/".Length);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("SIEGE -> 200 OK");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (Input.StartsWith("pastebin.com/"))
-                {
-                    WebClient Pastebin = new WebClient();
-                    string Payload = Pastebin.DownloadString("pastebin.com/raw/" + Input.Substring("pastebin.com/".Length));
-                    Config.ExpUri = Payload;
-                    Config.ExpPath = "pastebin.com/" + Input.Substring("pastebin.com/".Length);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("SIEGE -> 200 OK");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-            }
-            catch (Exception  ex)
-            {
-                if (ex.Message.Contains("404")) {
-                    Console.WriteLine("SIEGE -> Pastebin not found!");
-                }
-                else
-                {
-                    LogError(ex.Message);
-                }
             }
         }
     }
