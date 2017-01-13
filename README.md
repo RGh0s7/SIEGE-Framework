@@ -39,6 +39,7 @@ exploit
 * Optional logging
 * HTTP and HTTPS support
 * POST and GET support
+* Loading Exploits from github
 
 ## Examples ##
 ### Exploits ###
