@@ -66,7 +66,7 @@ namespace Siege
             }
             catch (Exception ex)
             {
-                Core.StatusCodeParser(ex.Message);
+                Core.StatusCodeParser(ex.Message,Config.unoffical);
                 return false;
             }
         }
@@ -90,7 +90,7 @@ namespace Siege
             }
             catch (Exception ex)
             {
-                Core.StatusCodeParser(ex.Message);
+                Core.StatusCodeParser(ex.Message, Config.unoffical);
                 return false;
             }
         }

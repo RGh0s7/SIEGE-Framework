@@ -172,7 +172,7 @@ namespace Siege
                     int Line = 1;
                     foreach (var item in Config.ExpList)
                     {
-                        Console.WriteLine(Line + " -> " + item);
+                        Console.WriteLine(Line + " -> " + item.Substring(0,item.Length - 6));
                         Line++;
                     }
                     Console.WriteLine();
@@ -193,7 +193,7 @@ namespace Siege
         {
             try
             {
-                    // Shw Settings
+                    // Show Settings
                     Console.WriteLine();
                     Console.WriteLine("---------- Settings ----------");
                     Console.WriteLine();
@@ -201,6 +201,17 @@ namespace Siege
                     Console.WriteLine("Output path -> " + Config.OutputPath);
                     Console.WriteLine("Listmode -> " + Config.Output);
                     Console.WriteLine("Useragent -> " + Config.Useragent);
+                    String Method = String.Empty;
+                    if (Config.Mode == 0)
+                    {
+                    Method = "GET";
+                    }
+                    else
+                    {
+                    Method = "POST";
+                }
+                    Console.WriteLine("Method -> " + Method);
+                    Console.WriteLine("Unoffical Codes -> " + Config.unoffical);
                     Console.WriteLine();
                     Console.WriteLine("------------------------------");
                     Console.WriteLine();
@@ -336,6 +347,23 @@ namespace Siege
                     else if (Input.Substring("mode ".Length) == "post") {
                         Config.Mode = 1;
                         Console.WriteLine("SIEGE -> Mode = Post");
+                    }
+                    else
+                    {
+                        Console.WriteLine("SIEGE -> Invalid Mode (use get or post lowercase only!)");
+                    }
+                }
+                else if (Input.StartsWith("unoffical-codes "))
+                {
+                    if (Input.Substring("unoffical-codes ".Length) == "true")
+                    {
+                        Config.unoffical = true;
+                        Console.WriteLine("SIEGE -> unoffical-codes = true");
+                    }
+                    else if (Input.Substring("unoffical-codes ".Length) == "false")
+                    {
+                        Config.unoffical = false;
+                        Console.WriteLine("SIEGE -> unoffical-codes = false");
                     }
                     else
                     {

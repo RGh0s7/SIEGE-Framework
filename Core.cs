@@ -11,12 +11,13 @@ namespace Siege
         {
             try {
                 Console.Title = Config.ProgramTitle + " " + Config.Version;
-                Console.WriteLine("---------- SIEGE ----------");
-                Console.WriteLine("Program Version: " + Config.Version);
-                Console.WriteLine("Exploits Loaded: " + FileSystem.InitExploits());
-                Console.WriteLine("---------------------------");
-                Console.WriteLine();
-                Console.WriteLine();
+                // Program Header Text
+                String[] ASCIIart = {"---------------------------"," ", @" _____ _                 ", @"/  ___(_)                ", @"\ `--. _  ___  __ _  ___ ", @" `--. \ |/ _ \/ _` |/ _ \", @"/\__/ / |  __/ (_| |  __/", @"\____/|_|\___|\__, |\___|", @"               __/ |     ", @"              |___/      "," ", "---------------------------", "|  https://darksiders.nl  |", "---------------------------", "Program Version: " + Config.Version, "Exploits Loaded: " + FileSystem.InitExploits(), "---------------------------"," "," " };
+                // For each line in ASCII array 
+                foreach (var s in ASCIIart)
+                {
+                    Console.WriteLine(s);
+                }
             }
             catch (Exception ex)
             {
@@ -217,7 +218,7 @@ namespace Siege
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(input + Environment.NewLine);
         }
-        public static void StatusCodeParser(string input)
+        public static void StatusCodeParser(string input,bool unofficial)
         {
             try { 
             // Client Errors
@@ -609,6 +610,246 @@ namespace Siege
                     if (Config.Output == true)
                     {
                         FileSystem.WriteOutput("SIEGE -> 511 Network Authentication Required");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("419") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 419 I'm a fox");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 419 I'm a fox");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("420") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 420 Method Failure / Enhance Your Calm");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 420 Method Failure / Enhance Your Calm");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("450") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 450 Blocked by Windows Parental Controls");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 450 Blocked by Windows Parental Controls");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("498") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 498 Invalid Token (Esri)");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 498 Invalid Token (Esri)");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("499") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 499 Token Required (Esri) / Request has been forbidden by antivirus / Client Closed Request");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 499 Token Required (Esri) / Request has been forbidden by antivirus / Client Closed Request");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("509") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 509 Bandwidth Limit Exceeded");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 509 Bandwidth Limit Exceeded");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("530") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 530 Site is frozen");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 530 Site is frozen");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("598") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 598 Network read timeout error");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 598 Network read timeout error");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("599") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 599 Network connect timeout error");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 599 Network connect timeout error");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("440") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 440 Login Time-out");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 440 Login Time-out");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("449") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 449 Retry With");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 449 Retry With");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("451") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 451 Redirect");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 451 Redirect");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("444") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 444 No Response");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 444 No Response");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("495") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 495 SSL Certificate Error");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 495 SSL Certificate Error");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("496") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 496 SSL Certificate Required");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 496 SSL Certificate Required");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("497") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 497 HTTP Request Sent to HTTPS Port");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 497 HTTP Request Sent to HTTPS Port");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("520") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 520 Unknown Error");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 520 Unknown Error");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("521") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 521 Web Server Is Down");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 521 Web Server Is Down");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("522") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 522 Connection Timed Out");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 522 Connection Timed Out");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("523") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 523 Origin Is Unreachable");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 523 Origin Is Unreachable");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("524") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 524 A Timeout Occurred");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 524 A Timeout Occurred");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("525") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 525 SSL Handshake Failed");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 525 SSL Handshake Failed");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("526") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 526 Invalid SSL Certificate");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 526 Invalid SSL Certificate");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (input.Contains("527") && unofficial == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("SIEGE -> 527 Railgun Error");
+                    if (Config.Output == true)
+                    {
+                        FileSystem.WriteOutput("SIEGE -> 527 Railgun Error");
                     }
                     Console.ForegroundColor = ConsoleColor.White;
                 }

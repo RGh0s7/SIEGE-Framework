@@ -11,7 +11,7 @@ namespace Siege
         // Config 
         public static bool running = true;
         public static string ProgramTitle = "SIEGE";
-        public static string Version = "1.7";
+        public static string Version = "1.8";
         public static string Extention = ".siege";
         public static string Target, var0, var1, var2, var3, var4, var5, var6, var7, var8, var9;
         public static string ExpUri = string.Empty, ExpPath = string.Empty;
@@ -22,5 +22,6 @@ namespace Siege
         public static string OutputPath = "output.txt";
         public static string Useragent = string.Empty;
         public static int Mode = 0;
+        public static bool unoffical = false;
     }
 }
